@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "agentbooks": {
+      "source": "acnlabs/agentbooks",
+      "sourceType": "github",
+      "computedHash": "20586e57d9c1cbb12cf60a5c53961aa357edf4f50a20f7b8382e23473c2fa3f2"
+    }
+  }
+}

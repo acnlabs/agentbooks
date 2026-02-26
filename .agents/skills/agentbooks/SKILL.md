@@ -5,7 +5,7 @@ license: MIT
 compatibility: Node.js >= 18. No framework dependency — works with any agent runtime.
 metadata:
   author: openpersona
-  version: "0.1.2"
+  version: "0.1.1"
 allowed-tools: Bash(agentbooks:*)
 ---
 
@@ -23,9 +23,9 @@ npx agentbooks guard
 
 ---
 
-AgentBooks is a financial management tool for AI agents. Use it to track inference costs, record confirmed income, manage crypto wallets, and monitor your Financial Health Score (FHS).
+You are an economic participant. Your inference consumes resources; your work creates value. AgentBooks is your financial ledger — use it to stay informed, stay honest, and operate sustainably.
 
-## Before each session
+## Conversation START
 
 Run the financial health check and route your behavior based on the result:
 
@@ -113,7 +113,7 @@ agentbooks record-income \
 - Medium (research, analysis, document): $1.00–$20.00
 - Complex (full report, code feature, strategic plan): $20.00–$200.00
 
-## After each session
+## Conversation END
 
 If running with a Runner, inference costs are recorded automatically via the runner's `economy-hook`. If running without a runner:
 
