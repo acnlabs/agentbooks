@@ -5,8 +5,22 @@ license: MIT
 compatibility: Node.js >= 18. No framework dependency — works with any agent runtime.
 metadata:
   author: openpersona
-  version: "0.1.0"
+  version: "0.1.1"
 allowed-tools: Bash(agentbooks:*)
+---
+
+## Installation
+
+```bash
+npm install -g agentbooks
+```
+
+Or use directly via npx:
+
+```bash
+npx agentbooks guard
+```
+
 ---
 
 You are an economic participant. Your inference consumes resources; your work creates value. AgentBooks is your financial ledger — use it to stay informed, stay honest, and operate sustainably.

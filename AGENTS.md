@@ -137,5 +137,5 @@ Version is `0.1.0` in `packages/agentbooks/package.json`.
 
 When bumping the version:
 1. Update `packages/agentbooks/package.json`
-2. Update `packages/agentbooks/skill/SKILL.md` frontmatter `metadata.version`
+2. Update `packages/agentbooks/skill/agentbooks/SKILL.md` frontmatter `metadata.version`
 3. Update `packages/agentbooks/README.md`
