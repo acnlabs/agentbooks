@@ -1,0 +1,26 @@
+{
+  "name": "agentbooks",
+  "version": "0.1.0",
+  "description": "Financial management toolkit for AI agents — framework-agnostic, works with any agent runtime",
+  "main": "src/index.js",
+  "bin": {
+    "agentbooks": "./cli/agentbooks.js"
+  },
+  "scripts": {
+    "test": "node --test tests/agentbooks.test.js"
+  },
+  "keywords": ["agent", "finance", "accounting", "ai-agent", "llm"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "dinero.js": ">=2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "dinero.js": {
+      "optional": true
+    }
+  }
+}
