@@ -2,7 +2,7 @@
 
 Financial management toolkit for AI agents — framework-agnostic, works with any agent runtime.
 
-**Version:** 0.1.3
+**Version:** 0.1.3 · [Live Demo Report →](https://htmlpreview.github.io/?https://raw.githubusercontent.com/acnlabs/agentbooks/main/examples/demo-report.html)
 
 ## What it is
 
@@ -65,6 +65,8 @@ To preview the report with realistic mock data (no real agent needed):
 node scripts/gen-demo-report.js                      # saves agentbooks-demo-report.html
 node scripts/gen-demo-report.js --output ./demo.html # custom path
 ```
+
+Or view the [hosted demo](https://htmlpreview.github.io/?https://raw.githubusercontent.com/acnlabs/agentbooks/main/examples/demo-report.html) directly in your browser.
 
 ## Runner Integration
 
