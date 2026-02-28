@@ -46,6 +46,7 @@ Usage:
   agentbooks pl                 Income statement
   agentbooks financial-health   FHS score
   agentbooks ledger             Transaction history
+  agentbooks report             Generate static HTML report
 
 Environment:
   AGENTBOOKS_AGENT_ID    Agent identifier (default: 'default')
@@ -61,6 +62,9 @@ switch (cmd) {
     break;
   case 'hook':
     require('./economy-hook');
+    break;
+  case 'report':
+    require('./report');
     break;
   default:
     // Delegate to economy.js (all management commands)

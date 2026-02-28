@@ -3,7 +3,7 @@
 const { test, describe, beforeEach } = require('node:test');
 const assert = require('node:assert/strict');
 
-const { InMemoryAdapter } = require('../adapters/in-memory');
+const { InMemoryAdapter }  = require('../adapters/in-memory');
 const {
   createInitialState,
   createIdentityInitialState,
@@ -399,5 +399,90 @@ describe('parseArgs env var priority', () => {
     else process.env.TOKEN_INPUT_COUNT = origEnv.TOKEN_INPUT_COUNT;
     if (origEnv.LLM_MODEL === undefined) delete process.env.LLM_MODEL;
     else process.env.LLM_MODEL = origEnv.LLM_MODEL;
+  });
+});
+
+// ─── HTML Report ─────────────────────────────────────────────────────────────
+
+describe('report', () => {
+  const { buildHTML, buildSparkline, buildCostBars, buildProviderRows } =
+    require('../cli/report.js').__test__;
+
+  let state, identity;
+
+  beforeEach(() => {
+    state    = createInitialState('report-agent');
+    identity = createIdentityInitialState('report-agent');
+  });
+
+  test('buildHTML returns a complete HTML document', () => {
+    const html = buildHTML('report-agent', state, identity);
+    assert.ok(html.startsWith('<!DOCTYPE html>'));
+    assert.ok(html.includes('<title>AgentBooks Report'));
+    assert.ok(html.includes('report-agent'));
+    assert.ok(html.includes('DEVELOPMENT'));
+    assert.ok(html.includes('UNINITIALIZED'));
+  });
+
+  test('buildHTML includes wallet address when present', () => {
+    identity.walletAddress = '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef';
+    const html = buildHTML('report-agent', state, identity);
+    assert.ok(html.includes('0xdeadbeef'));
+  });
+
+  test('buildHTML marks production mode badge', () => {
+    identity.mode = 'production';
+    identity.primaryProvider = 'coinbase-cdp';
+    identity.providers['coinbase-cdp'].enabled = true;
+    state.balanceSheet.primaryProvider = 'coinbase-cdp';
+    const html = buildHTML('report-agent', state, identity);
+    assert.ok(html.includes('PRODUCTION'));
+  });
+
+  test('buildSparkline returns SVG placeholder when data < 2', () => {
+    const svg = buildSparkline([], 700, 180);
+    assert.ok(svg.includes('<svg'));
+    assert.ok(svg.includes('No burn rate data'));
+  });
+
+  test('buildSparkline renders polyline when data >= 2', () => {
+    const history = Array.from({ length: 5 }, (_, i) => ({
+      timestamp: `2025-01-0${i + 1}T00:00:00Z`,
+      dailyRateEstimate: 0.01 * (i + 1),
+      sessionCost: 0.005,
+    }));
+    const svg = buildSparkline(history, 700, 180);
+    assert.ok(svg.includes('<polyline'));
+    assert.ok(svg.includes('<polygon'));
+  });
+
+  test('buildCostBars returns placeholder when no expenses', () => {
+    const html = buildCostBars(state.incomeStatement.currentPeriod.expenses);
+    assert.ok(html.includes('No expenses recorded'));
+  });
+
+  test('buildCostBars renders bars for recorded expenses', () => {
+    const expenses = state.incomeStatement.currentPeriod.expenses;
+    expenses.inference.llm['gpt-4o'] = { input: 0.05, output: 0.02, thinking: 0 };
+    expenses.total = 0.07;
+    const html = buildCostBars(expenses);
+    assert.ok(html.includes('inference'));
+    assert.ok(html.includes('gpt-4o'));
+  });
+
+  test('buildProviderRows shows no-provider message when none enabled', () => {
+    const html = buildProviderRows(state, identity);
+    assert.ok(html.includes('No providers connected'));
+  });
+
+  test('buildProviderRows shows enabled provider with primary badge', () => {
+    identity.providers['coinbase-cdp'].enabled = true;
+    identity.primaryProvider = 'coinbase-cdp';
+    state.balanceSheet.primaryProvider = 'coinbase-cdp';
+    state.balanceSheet.assets.providers['coinbase-cdp'].USDC = 12.5;
+    const html = buildProviderRows(state, identity);
+    assert.ok(html.includes('coinbase-cdp'));
+    assert.ok(html.includes('primary'));
+    assert.ok(html.includes('USDC'));
   });
 });

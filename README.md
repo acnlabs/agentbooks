@@ -35,6 +35,9 @@ agentbooks wallet-connect --provider coinbase-cdp
 # Check financial health
 agentbooks status
 
+# Generate a self-contained HTML report (open in browser)
+agentbooks report
+
 # Record a cost (manual)
 agentbooks record-cost --channel inference --amount 0.005 --note "code review"
 
@@ -44,6 +47,17 @@ agentbooks record-income --amount 10.00 --quality high --confirmed
 # Pre-conversation health check (outputs FINANCIAL_HEALTH_REPORT)
 agentbooks guard
 ```
+
+## HTML Report
+
+Generate a self-contained HTML file for human review — no external dependencies, open directly in a browser:
+
+```bash
+agentbooks report                          # saves agentbooks-report-<id>-<date>.html
+agentbooks report --output ./report.html   # custom output path
+```
+
+The report includes: Financial Health Score with tier badge, wallet & provider balances, P&L (current period + all time), cost breakdown by channel, daily burn rate trend chart (SVG), and the last 50 ledger entries.
 
 ## Runner Integration
 

@@ -35,10 +35,11 @@ adapters/
   in-memory.js       ← test adapter (same interface as json-file)
 
 cli/
-  agentbooks.js      ← unified bin entry point (routes to guard / hook / economy)
+  agentbooks.js      ← unified bin entry point (routes to guard / hook / economy / report)
   economy-guard.js   ← pre-conversation FINANCIAL_HEALTH_REPORT
   economy-hook.js    ← post-conversation cost recorder (source: 'runner')
   economy.js         ← all management commands (wallet-init, status, record-cost, …)
+  report.js          ← self-contained HTML report generator (human-readable dashboard)
 
 tests/
   agentbooks.test.js ← 30 unit tests covering all src/ modules

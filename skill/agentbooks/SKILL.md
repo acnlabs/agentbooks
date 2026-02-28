@@ -132,6 +132,8 @@ agentbooks pl                # Current period income statement
 agentbooks financial-health  # Real-time FHS score (bypasses cache)
 agentbooks ledger            # Transaction ledger (last 20 entries)
 agentbooks ledger --limit 50 # More entries
+agentbooks report            # Generate self-contained HTML report (for human review)
+agentbooks report --output ./report.html  # Custom output path
 ```
 
 ## Wallet Setup
