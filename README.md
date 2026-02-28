@@ -59,6 +59,13 @@ agentbooks report --output ./report.html   # custom output path
 
 The report includes: Financial Health Score with tier badge, wallet & provider balances, P&L (current period + all time), cost breakdown by channel, daily burn rate trend chart (SVG), and the last 50 ledger entries.
 
+To preview the report with realistic mock data (no real agent needed):
+
+```bash
+node scripts/gen-demo-report.js                      # saves agentbooks-demo-report.html
+node scripts/gen-demo-report.js --output ./demo.html # custom path
+```
+
 ## Runner Integration
 
 Runners call `economy-hook` after each conversation to record LLM costs automatically.

@@ -41,6 +41,9 @@ cli/
   economy.js         ← all management commands (wallet-init, status, record-cost, …)
   report.js          ← self-contained HTML report generator (human-readable dashboard)
 
+scripts/
+  gen-demo-report.js ← generate a demo HTML report with realistic mock data (no real agent needed)
+
 tests/
   agentbooks.test.js ← 30 unit tests covering all src/ modules
 ```
