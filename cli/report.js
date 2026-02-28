@@ -83,12 +83,40 @@ function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
+function humanDiagnosis(code) {
+  return {
+    'healthy':                'Healthy',
+    'no_real_provider':       'No real provider connected',
+    'critically_low_runway':  'Critically low runway',
+    'low_runway':             'Low runway',
+    'balance_depleted':       'Balance depleted',
+  }[code] || code;
+}
+
+function humanPrescription(code) {
+  return {
+    'operate_normally':         'Operate normally',
+    'reduce_spending':          'Reduce spending',
+    'seek_funding':             'Seek funding',
+    'connect_real_provider':    'Connect a real provider',
+    'pause_non_essential':      'Pause non-essential operations',
+    'emergency_cost_reduction': 'Emergency cost reduction',
+    'notify_operator':          'Notify operator',
+  }[code] || code;
+}
+
 // ─── SVG Sparkline ───────────────────────────────────────────────────────────
+
+function sparkAxisFmt(val) {
+  if (val === 0) return '$0';
+  if (val >= 1)  return `$${val.toFixed(2)}`;
+  return `$${parseFloat(val.toFixed(4))}`;  // trim trailing zeros: 0.2250 → 0.225
+}
 
 function buildSparkline(burnHistory, width, height) {
   const data = (burnHistory || []).slice(-30);
   if (data.length < 2) {
-    return `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+    return `<svg width="100%" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" style="display:block">
       <text x="${width/2}" y="${height/2}" text-anchor="middle" fill="#94a3b8" font-size="13" font-family="system-ui">No burn rate data yet</text>
     </svg>`;
   }
@@ -108,7 +136,7 @@ function buildSparkline(burnHistory, width, height) {
   // Y axis labels (3 ticks)
   const yTicks = [0, 0.5, 1].map(t => ({
     y: pad.top + (1 - t) * innerH,
-    label: `$${(t * maxVal).toFixed(4)}`,
+    label: sparkAxisFmt(t * maxVal),
   }));
 
   // X axis labels: first, middle, last
@@ -128,7 +156,7 @@ function buildSparkline(burnHistory, width, height) {
     return { x: pad.left + (i / (values.length - 1)) * innerW, label };
   });
 
-  return `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+  return `<svg width="100%" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" style="display:block">
     <defs>
       <linearGradient id="burnGrad" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#6366f1" stop-opacity="0.3"/>
@@ -285,12 +313,14 @@ function buildLedgerRows(ledger) {
   return entries.map(e => {
     const color = typeColor[e.type] || '#64748b';
     const sign  = e.type === 'income' || e.type === 'deposit' ? '+' : '-';
+    const channelCell = e.channel
+      ? `${esc(e.channel)}${e.source ? `<br><span style="font-size:10px;color:#cbd5e1">${esc(e.source)}</span>` : ''}`
+      : '—';
     return `<tr style="border-bottom:1px solid #f1f5f9">
       <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">${esc(fmtDate(e.timestamp))}</td>
       <td style="padding:8px 12px"><span style="font-size:11px;font-weight:600;color:${color};background:${color}18;padding:2px 7px;border-radius:10px">${esc(e.type)}</span></td>
       <td style="padding:8px 12px;font-size:13px;font-weight:600;color:${color};text-align:right">${sign}$${fmt(e.amount)}</td>
-      <td style="padding:8px 12px;font-size:12px;color:#6b7280">${esc(e.channel || '—')}</td>
-      <td style="padding:8px 12px;font-size:12px;color:#9ca3af">${esc(e.source || '—')}</td>
+      <td style="padding:8px 12px;font-size:12px;color:#6b7280;line-height:1.4">${channelCell}</td>
       <td style="padding:8px 12px;font-size:12px;color:#374151">${esc(e.note || '')}</td>
     </tr>`;
   }).join('');
@@ -364,7 +394,7 @@ function buildHTML(agentId, state, identity) {
     <h1>AgentBooks Financial Report</h1>
     <div class="meta">
       <span>Agent: <strong>${esc(agentId)}</strong></span>
-      ${wallet ? `<span title="${esc(wallet)}">Wallet: <code>${esc(shortWallet)}</code></span>` : ''}
+      ${wallet ? `<span title="${esc(wallet)}" style="cursor:help">Wallet: <code>${esc(shortWallet)}</code></span>` : ''}
       <span>${modeBadge}</span>
       <span style="margin-left:auto;color:#9ca3af">Generated ${esc(generatedAt)}</span>
     </div>
@@ -394,13 +424,13 @@ function buildHTML(agentId, state, identity) {
           </div>
           <div>
             <div class="stat-label">Diagnosis</div>
-            <div class="stat-value sm" style="font-size:13px">${esc(fh.diagnosis || '—')}</div>
+            <div class="stat-value sm" style="font-size:13px">${esc(humanDiagnosis(fh.diagnosis || '—'))}</div>
           </div>
         </div>
         ${fh.prescriptions && fh.prescriptions.length > 0 ? `
         <hr class="divider">
         <div class="stat-label" style="margin-bottom:6px">Prescriptions</div>
-        <ul class="rx">${fh.prescriptions.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+        <ul class="rx">${fh.prescriptions.map(p => `<li>${esc(humanPrescription(p))}</li>`).join('')}</ul>` : ''}
       </div>
     </div>
   </div>
@@ -411,7 +441,6 @@ function buildHTML(agentId, state, identity) {
     <!-- Balance Sheet -->
     <div class="card">
       <div class="card-title">Balance Sheet</div>
-      ${wallet ? `<div style="margin-bottom:14px"><div class="stat-label">Wallet Address</div><code style="font-size:11px;word-break:break-all">${esc(wallet)}</code></div>` : ''}
       <table style="margin-bottom:16px">
         <thead>
           <tr><th>Provider</th><th>Balance</th><th>Sync</th></tr>
@@ -423,10 +452,12 @@ function buildHTML(agentId, state, identity) {
         <div>
           <div class="stat-label">Operational Balance</div>
           <div class="stat-value sm">$${fmt(bs.operationalBalance, 2)}</div>
+          <div style="font-size:11px;color:#9ca3af;margin-top:2px">primary provider</div>
         </div>
         <div>
           <div class="stat-label">Total Assets</div>
           <div class="stat-value sm">$${fmt(bs.assets && bs.assets.totalUSDEquivalent, 2)}</div>
+          <div style="font-size:11px;color:#9ca3af;margin-top:2px">all providers</div>
         </div>
         <div>
           <div class="stat-label">Liabilities</div>
@@ -512,8 +543,7 @@ function buildHTML(agentId, state, identity) {
             <th>Timestamp</th>
             <th>Type</th>
             <th style="text-align:right">Amount</th>
-            <th>Channel</th>
-            <th>Source</th>
+            <th>Channel / Source</th>
             <th>Note</th>
           </tr>
         </thead>

@@ -38,9 +38,9 @@
     <h1>AgentBooks Financial Report</h1>
     <div class="meta">
       <span>Agent: <strong>samantha</strong></span>
-      <span title="0x37a8eec1ce19687d132fe29051dca629d164e2c4">Wallet: <code>0x37a8…e2c4</code></span>
+      <span title="0x37a8eec1ce19687d132fe29051dca629d164e2c4" style="cursor:help">Wallet: <code>0x37a8…e2c4</code></span>
       <span><span style="font-size:11px;background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:10px;font-weight:600">PRODUCTION</span></span>
-      <span style="margin-left:auto;color:#9ca3af">Generated 2026-02-28 05:48:15 UTC</span>
+      <span style="margin-left:auto;color:#9ca3af">Generated 2026-02-28 05:59:52 UTC</span>
     </div>
   </div>
 
@@ -68,13 +68,13 @@
           </div>
           <div>
             <div class="stat-label">Diagnosis</div>
-            <div class="stat-value sm" style="font-size:13px">healthy</div>
+            <div class="stat-value sm" style="font-size:13px">Healthy</div>
           </div>
         </div>
         
         <hr class="divider">
         <div class="stat-label" style="margin-bottom:6px">Prescriptions</div>
-        <ul class="rx"><li>operate_normally</li></ul>
+        <ul class="rx"><li>Operate normally</li></ul>
       </div>
     </div>
   </div>
@@ -85,7 +85,6 @@
     <!-- Balance Sheet -->
     <div class="card">
       <div class="card-title">Balance Sheet</div>
-      <div style="margin-bottom:14px"><div class="stat-label">Wallet Address</div><code style="font-size:11px;word-break:break-all">0x37a8eec1ce19687d132fe29051dca629d164e2c4</code></div>
       <table style="margin-bottom:16px">
         <thead>
           <tr><th>Provider</th><th>Balance</th><th>Sync</th></tr>
@@ -101,10 +100,12 @@
         <div>
           <div class="stat-label">Operational Balance</div>
           <div class="stat-value sm">$67.96</div>
+          <div style="font-size:11px;color:#9ca3af;margin-top:2px">primary provider</div>
         </div>
         <div>
           <div class="stat-label">Total Assets</div>
           <div class="stat-value sm">$67.96</div>
+          <div style="font-size:11px;color:#9ca3af;margin-top:2px">all providers</div>
         </div>
         <div>
           <div class="stat-label">Liabilities</div>
@@ -210,7 +211,7 @@
   <!-- Burn Rate Chart -->
   <div class="card">
     <div class="card-title">Daily Burn Rate History</div>
-    <div style="overflow-x:auto"><svg width="700" height="180" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+    <div style="overflow-x:auto"><svg width="100%" viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg" style="display:block">
     <defs>
       <linearGradient id="burnGrad" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#6366f1" stop-opacity="0.3"/>
@@ -226,7 +227,7 @@
     <!-- Dots -->
     <circle cx="55.0" cy="92.0" r="3" fill="#6366f1"/><circle cx="180.0" cy="84.0" r="3" fill="#6366f1"/><circle cx="305.0" cy="86.7" r="3" fill="#6366f1"/><circle cx="430.0" cy="57.3" r="3" fill="#6366f1"/><circle cx="555.0" cy="68.0" r="3" fill="#6366f1"/><circle cx="680.0" cy="20.0" r="3" fill="#6366f1"/>
     <!-- Y axis labels -->
-    <text x="49" y="144.0" text-anchor="end" fill="#64748b" font-size="11" font-family="system-ui">$0.0000</text><text x="49" y="84.0" text-anchor="end" fill="#64748b" font-size="11" font-family="system-ui">$0.2250</text><text x="49" y="24.0" text-anchor="end" fill="#64748b" font-size="11" font-family="system-ui">$0.4500</text>
+    <text x="49" y="144.0" text-anchor="end" fill="#64748b" font-size="11" font-family="system-ui">$0</text><text x="49" y="84.0" text-anchor="end" fill="#64748b" font-size="11" font-family="system-ui">$0.225</text><text x="49" y="24.0" text-anchor="end" fill="#64748b" font-size="11" font-family="system-ui">$0.45</text>
     <!-- X axis labels -->
     <text x="55.0" y="160.0" text-anchor="middle" fill="#64748b" font-size="11" font-family="system-ui">02-23</text><text x="305.0" y="160.0" text-anchor="middle" fill="#64748b" font-size="11" font-family="system-ui">02-25</text><text x="680.0" y="160.0" text-anchor="middle" fill="#64748b" font-size="11" font-family="system-ui">02-28</text>
     <!-- Axis -->
@@ -246,45 +247,39 @@
             <th>Timestamp</th>
             <th>Type</th>
             <th style="text-align:right">Amount</th>
-            <th>Channel</th>
-            <th>Source</th>
+            <th>Channel / Source</th>
             <th>Note</th>
           </tr>
         </thead>
         <tbody><tr style="border-bottom:1px solid #f1f5f9">
-      <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">2026-02-28 05:39:51</td>
+      <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">2026-02-28 05:51:28</td>
       <td style="padding:8px 12px"><span style="font-size:11px;font-weight:600;color:#22c55e;background:#22c55e18;padding:2px 7px;border-radius:10px">income</span></td>
       <td style="padding:8px 12px;font-size:13px;font-weight:600;color:#22c55e;text-align:right">+$5.0000</td>
-      <td style="padding:8px 12px;font-size:12px;color:#6b7280">faculty:voice</td>
-      <td style="padding:8px 12px;font-size:12px;color:#9ca3af">acn</td>
+      <td style="padding:8px 12px;font-size:12px;color:#6b7280;line-height:1.4">faculty:voice<br><span style="font-size:10px;color:#cbd5e1">acn</span></td>
       <td style="padding:8px 12px;font-size:12px;color:#374151">Voice task achievement reward</td>
     </tr><tr style="border-bottom:1px solid #f1f5f9">
-      <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">2026-02-28 05:18:15</td>
+      <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">2026-02-28 05:29:52</td>
       <td style="padding:8px 12px"><span style="font-size:11px;font-weight:600;color:#ef4444;background:#ef444418;padding:2px 7px;border-radius:10px">cost</span></td>
       <td style="padding:8px 12px;font-size:13px;font-weight:600;color:#ef4444;text-align:right">-$2.5000</td>
-      <td style="padding:8px 12px;font-size:12px;color:#6b7280">runtime</td>
-      <td style="padding:8px 12px;font-size:12px;color:#9ca3af">agent</td>
+      <td style="padding:8px 12px;font-size:12px;color:#6b7280;line-height:1.4">runtime<br><span style="font-size:10px;color:#cbd5e1">agent</span></td>
       <td style="padding:8px 12px;font-size:12px;color:#374151">Cloud compute runtime monthly prorated</td>
     </tr><tr style="border-bottom:1px solid #f1f5f9">
-      <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">2026-02-28 04:38:03</td>
+      <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">2026-02-28 04:49:40</td>
       <td style="padding:8px 12px"><span style="font-size:11px;font-weight:600;color:#ef4444;background:#ef444418;padding:2px 7px;border-radius:10px">cost</span></td>
       <td style="padding:8px 12px;font-size:13px;font-weight:600;color:#ef4444;text-align:right">-$0.0420</td>
-      <td style="padding:8px 12px;font-size:12px;color:#6b7280">inference</td>
-      <td style="padding:8px 12px;font-size:12px;color:#9ca3af">runner</td>
+      <td style="padding:8px 12px;font-size:12px;color:#6b7280;line-height:1.4">inference<br><span style="font-size:10px;color:#cbd5e1">runner</span></td>
       <td style="padding:8px 12px;font-size:12px;color:#374151">LLM Inference: GPT-4o</td>
     </tr><tr style="border-bottom:1px solid #f1f5f9">
-      <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">2026-02-28 04:33:15</td>
+      <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">2026-02-28 04:44:52</td>
       <td style="padding:8px 12px"><span style="font-size:11px;font-weight:600;color:#22c55e;background:#22c55e18;padding:2px 7px;border-radius:10px">income</span></td>
       <td style="padding:8px 12px;font-size:13px;font-weight:600;color:#22c55e;text-align:right">+$15.5000</td>
-      <td style="padding:8px 12px;font-size:12px;color:#6b7280">skill:creative-writing</td>
-      <td style="padding:8px 12px;font-size:12px;color:#9ca3af">acn</td>
+      <td style="padding:8px 12px;font-size:12px;color:#6b7280;line-height:1.4">skill:creative-writing<br><span style="font-size:10px;color:#cbd5e1">acn</span></td>
       <td style="padding:8px 12px;font-size:12px;color:#374151">Creative writing task bounty</td>
     </tr><tr style="border-bottom:1px solid #f1f5f9">
-      <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">2026-02-28 02:18:15</td>
+      <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">2026-02-28 02:29:52</td>
       <td style="padding:8px 12px"><span style="font-size:11px;font-weight:600;color:#6366f1;background:#6366f118;padding:2px 7px;border-radius:10px">deposit</span></td>
       <td style="padding:8px 12px;font-size:13px;font-weight:600;color:#6366f1;text-align:right">+$50.0000</td>
-      <td style="padding:8px 12px;font-size:12px;color:#6b7280">wallet</td>
-      <td style="padding:8px 12px;font-size:12px;color:#9ca3af">host</td>
+      <td style="padding:8px 12px;font-size:12px;color:#6b7280;line-height:1.4">wallet<br><span style="font-size:10px;color:#cbd5e1">host</span></td>
       <td style="padding:8px 12px;font-size:12px;color:#374151">Initial fueling</td>
     </tr></tbody>
       </table>
@@ -292,7 +287,7 @@
   </div>
 
   <div style="text-align:center;font-size:12px;color:#cbd5e1;padding:16px 0">
-    AgentBooks v0.1.3 · 2026-02-28 05:48:15 UTC
+    AgentBooks v0.1.3 · 2026-02-28 05:59:52 UTC
   </div>
 
 </div>
