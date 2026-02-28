@@ -112,10 +112,21 @@ function buildSparkline(burnHistory, width, height) {
   }));
 
   // X axis labels: first, middle, last
-  const xLabels = [0, Math.floor((data.length - 1) / 2), data.length - 1].map(i => ({
-    x: pad.left + (i / (values.length - 1)) * innerW,
-    label: data[i].timestamp ? data[i].timestamp.slice(5, 10) : '',
-  }));
+  // Use HH:MM when all data is within 24 hours, otherwise MM-DD
+  const firstTs = data[0].timestamp ? new Date(data[0].timestamp) : null;
+  const lastTs  = data[data.length - 1].timestamp ? new Date(data[data.length - 1].timestamp) : null;
+  const spanMs  = (firstTs && lastTs) ? Math.abs(lastTs - firstTs) : 0;
+  const useTime = spanMs < 86400000; // < 24 hours → show HH:MM
+  const xLabels = [0, Math.floor((data.length - 1) / 2), data.length - 1].map(i => {
+    const ts = data[i].timestamp;
+    let label = '';
+    if (ts) {
+      label = useTime
+        ? ts.slice(11, 16)   // HH:MM
+        : ts.slice(5, 10);   // MM-DD
+    }
+    return { x: pad.left + (i / (values.length - 1)) * innerW, label };
+  });
 
   return `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
     <defs>
