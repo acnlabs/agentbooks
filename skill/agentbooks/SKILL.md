@@ -5,7 +5,7 @@ license: MIT
 compatibility: Node.js >= 18. No framework dependency — works with any agent runtime.
 metadata:
   author: openpersona
-  version: "0.1.2"
+  version: "0.1.3"
 allowed-tools: Bash(agentbooks:*)
 ---
 

@@ -2,7 +2,7 @@
 
 Financial management toolkit for AI agents — framework-agnostic, works with any agent runtime.
 
-**Version:** 0.1.2
+**Version:** 0.1.3
 
 ## What it is
 
