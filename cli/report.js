@@ -443,7 +443,7 @@ function buildHTML(agentId, state, identity) {
     <div class="card">
       <div class="card-title">Income Statement</div>
       <div style="margin-bottom:16px">
-        <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px">Current Period (${esc(cp.periodStart || '—')})</div>
+        <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px">Current Period (${esc(cp.periodStart || '—')} – ${esc(cp.periodEnd || 'present')})</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
           <div>
             <div class="stat-label">Revenue</div>
