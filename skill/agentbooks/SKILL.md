@@ -11,7 +11,7 @@ env-vars:
     - LLM_MODEL
 metadata:
   author: openpersona
-  version: "0.1.4"
+  version: "0.1.5"
   source: https://github.com/acnlabs/agentbooks
 allowed-tools: Bash(agentbooks:*)
 ---

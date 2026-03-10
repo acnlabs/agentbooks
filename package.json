@@ -1,6 +1,6 @@
 {
   "name": "agentbooks",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Financial management toolkit for AI agents — framework-agnostic, works with any agent runtime",
   "main": "src/index.js",
   "bin": {

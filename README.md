@@ -2,7 +2,7 @@
 
 Financial management toolkit for AI agents — framework-agnostic, works with any agent runtime.
 
-**Version:** 0.1.4 · [Live Demo Report →](https://htmlpreview.github.io/?https://raw.githubusercontent.com/acnlabs/agentbooks/main/examples/demo-report.html)
+**Version:** 0.1.5 · [Live Demo Report →](https://htmlpreview.github.io/?https://raw.githubusercontent.com/acnlabs/agentbooks/main/examples/demo-report.html)
 
 ## What it is
 
