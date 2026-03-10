@@ -3,6 +3,13 @@ name: agentbooks
 description: Financial management for AI agents. Track LLM inference costs, record confirmed income, manage multi-provider crypto wallets, and compute a Financial Health Score. Use when you need to check your balance, record a cost or expense, report financial health, manage your wallet, or assess economic sustainability.
 license: MIT
 compatibility: Node.js >= 18. No framework dependency — works with any agent runtime.
+requires: node >= 18, npm
+env-vars:
+  optional:
+    - AGENTBOOKS_AGENT_ID
+    - AGENTBOOKS_DATA_PATH
+    - AGENTBOOKS_PROVIDER
+    - LLM_MODEL
 metadata:
   author: openpersona
   version: "0.1.4"
@@ -11,11 +18,13 @@ allowed-tools: Bash(agentbooks:*)
 
 ## Installation
 
+> **Note:** This installs a third-party npm package (`agentbooks`) not bundled with this skill. Audit the source repository before running in production environments.
+
 ```bash
 npm install -g agentbooks
 ```
 
-Or use directly via npx:
+Or use directly via npx (downloads on each invocation):
 
 ```bash
 npx agentbooks guard
@@ -24,6 +33,16 @@ npx agentbooks guard
 ---
 
 AgentBooks is a financial management tool for AI agents. Use it to track inference costs, record confirmed income, manage crypto wallets, and monitor your Financial Health Score (FHS).
+
+## Security & Trust
+
+This skill contains **no bundled code** — it instructs the agent to download and execute the `agentbooks` npm package from the public registry at runtime. Before installing or invoking:
+
+1. **Verify the source** — Review the [agentbooks repository](https://github.com/acnlabs/agentbooks) and confirm you are installing the official package from the npm registry.
+2. **Isolate data** — Set `AGENTBOOKS_DATA_PATH` to a dedicated directory (e.g. `~/.agentbooks/myagent/`) instead of the default shared `~/.openclaw` path, to limit the blast radius if the CLI behaves unexpectedly.
+3. **Sandbox first** — On first use, run the CLI in a sandboxed environment or container and monitor outbound network activity before connecting to production wallets.
+4. **Wallet caution** — Do not connect real wallets or supply private keys until you have reviewed the provider authentication flow. Prefer testnets or throwaway wallets for initial evaluation.
+5. **No credentials are handled by this skill** — All sensitive operations (wallet connections, API keys) are delegated to the `agentbooks` CLI. This skill provides no credential storage, rotation, or encryption of its own.
 
 ## Before each session
 
@@ -153,6 +172,8 @@ Your financial data is stored at:
 - **Standalone:** `~/.agentbooks/<agentId>/`
 - **OpenPersona:** `~/.openclaw/economy/persona-<slug>/`
 - **Override:** set `AGENTBOOKS_DATA_PATH`
+
+> **Isolation tip:** Set `AGENTBOOKS_DATA_PATH` to a dedicated directory (e.g. `~/.agentbooks/myagent/`) to avoid mingling financial data with other agent state under `~/.openclaw`. This is strongly recommended when evaluating the tool for the first time.
 
 Two files:
 - `economic-state.json` — ledger, income statement, balance sheet, burn rate history
