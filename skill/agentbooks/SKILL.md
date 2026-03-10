@@ -2,8 +2,7 @@
 name: agentbooks
 description: Financial management for AI agents. Track LLM inference costs, record confirmed income, manage multi-provider crypto wallets, and compute a Financial Health Score. Use when you need to check your balance, record a cost or expense, report financial health, manage your wallet, or assess economic sustainability.
 license: MIT
-compatibility: Node.js >= 18. No framework dependency — works with any agent runtime.
-requires: node >= 18, npm
+compatibility: Requires node >= 18 and npm. No framework dependency — works with any agent runtime.
 env-vars:
   optional:
     - AGENTBOOKS_AGENT_ID
@@ -13,6 +12,7 @@ env-vars:
 metadata:
   author: openpersona
   version: "0.1.4"
+  source: https://github.com/acnlabs/agentbooks
 allowed-tools: Bash(agentbooks:*)
 ---
 
